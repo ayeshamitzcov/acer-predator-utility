@@ -13,12 +13,19 @@ jobs:
   installer:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: ilammy/msvc-dev-cmd@v1
+      - uses: actions/checkout@v5
 
       - name: Configure
-        run: cmake -S . -B build -G "Visual Studio 17 2022" -A x64
+        shell: pwsh
+        run: |
+          $gen = "Visual Studio 17 2022"
+          $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+          if (Test-Path $vswhere) {
+            $line = & $vswhere -latest -property catalog_productLineVersion
+            if ("$line" -eq "18") { $gen = "Visual Studio 18 2026" }
+          }
+          Write-Host "Using generator $gen"
+          cmake -S . -B build -G $gen -A x64
 
       - name: Build
         run: cmake --build build --config Release
@@ -27,6 +34,7 @@ jobs:
         run: choco install innosetup -y --no-progress
 
       - name: Compile installer
+        shell: pwsh
         run: |
           $iscc = @(
             "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe",
