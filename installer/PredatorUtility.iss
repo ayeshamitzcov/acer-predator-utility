@@ -61,6 +61,9 @@ Filename: "powershell.exe"; \
     Flags: runhidden waituntilterminated
 Filename: "{app}\{#MyAppExeName}"; Description: "Launch Predator Utility"; Flags: nowait postinstall skipifsilent
 
+[UninstallRun]
+Filename: "schtasks.exe"; Parameters: "/Delete /TN PredatorUtility /F"; Flags: runhidden waituntilterminated; RunOnceId: "DelStartupTask"
+
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}"
 

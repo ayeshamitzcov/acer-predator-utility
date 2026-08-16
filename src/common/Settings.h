@@ -14,6 +14,8 @@ struct Settings {
     bool couple_fans = true;
     bool monitor_gpu = false;
     bool disable_dgpu_on_eco = true;
+    bool start_with_windows = true;
+    bool start_minimized = false;
     int rgb_mode = 0;
     int rgb_speed = 3;
     int rgb_brightness = 80;

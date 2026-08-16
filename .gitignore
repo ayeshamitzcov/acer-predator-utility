@@ -9,6 +9,6 @@
 *.suo
 *.log
 .cache/
-probe-report.txt
+imgui.ini
 *.old.*.exe
 PredatorUtility.old.*

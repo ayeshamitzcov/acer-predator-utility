@@ -7,6 +7,7 @@
 #include "acer/RgbKb.h"
 #include "common/Log.h"
 #include "common/Settings.h"
+#include "common/Startup.h"
 #include "display/DisplayMode.h"
 #include "power/DiscreteGpu.h"
 #include "power/PowerPlans.h"
@@ -927,6 +928,17 @@ void DrawUi() {
                 OverlaySetVisible(g_settings.osd);
                 g_settings.Save();
             }
+            if (ImGui::Checkbox("Start with Windows", &g_settings.start_with_windows)) {
+                SetRunAtStartup(g_settings.start_with_windows, g_settings.start_minimized);
+                g_settings.Save();
+            }
+            if (ImGui::Checkbox("Start minimized in the tray", &g_settings.start_minimized)) {
+                if (g_settings.start_with_windows) {
+                    SetRunAtStartup(true, g_settings.start_minimized);
+                }
+                g_settings.Save();
+            }
+            ImGui::TextDisabled("Startup uses a logon task so it can run as admin without a UAC prompt.");
             if (ImGui::Checkbox("Monitor graphics card (can raise idle heat)", &g_settings.monitor_gpu)) {
                 g_settings.Save();
             }
@@ -1152,7 +1164,7 @@ LRESULT WINAPI WndProc(HWND h, UINT msg, WPARAM w, LPARAM l) {
 
 }  // namespace
 
-int RunApp() {
+int RunApp(bool start_minimized) {
     LogInit();
 
     WNDCLASSEXW wc{sizeof(wc)};
@@ -1175,15 +1187,18 @@ int RunApp() {
     ImGui_ImplDX11_Init(g_device, g_ctx);
     g_imgui_ready = true;
     g_starting = true;
-    ShowWindow(g_hwnd, SW_SHOWDEFAULT);
-    UpdateWindow(g_hwnd);
-    ShowBusy("Starting Predator Utility");
+    if (!start_minimized) {
+        ShowWindow(g_hwnd, SW_SHOWDEFAULT);
+        UpdateWindow(g_hwnd);
+        ShowBusy("Starting Predator Utility");
+    }
 
     ShowBusy("Stopping PredatorSense");
     KillPredatorSense(PumpBusyFrame);
 
     ShowBusy("Loading settings");
     g_settings = Settings::Load();
+    SetRunAtStartup(g_settings.start_with_windows, g_settings.start_minimized);
     PumpBusyFrame();
 
     ShowBusy("Connecting to firmware");
@@ -1215,6 +1230,9 @@ int RunApp() {
 
     g_starting = false;
     HideBusy();
+    if (start_minimized) {
+        ShowWindow(g_hwnd, SW_HIDE);
+    }
 
     MSG msg{};
     while (g_running) {

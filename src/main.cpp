@@ -29,7 +29,7 @@ bool RelaunchElevated(PWSTR cmdline) {
     sei.lpVerb = L"runas";
     sei.lpFile = path;
     sei.lpParameters = cmdline;
-    sei.nShow = SW_SHOWNORMAL;
+        sei.nShow = (cmdline && wcsstr(cmdline, L"--minimized")) ? SW_HIDE : SW_SHOWNORMAL;
     return ShellExecuteExW(&sei) == TRUE;
 }
 
@@ -50,5 +50,6 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR cmdline, int) {
         getchar();
         return 0;
     }
-    return predator::ui::RunApp();
+    const bool start_min = cmdline && wcsstr(cmdline, L"--minimized");
+    return predator::ui::RunApp(start_min);
 }

@@ -63,6 +63,8 @@ Settings Settings::Load() {
     s.couple_fans = ParseInt(kv, "couple_fans", 1) != 0;
     s.monitor_gpu = ParseInt(kv, "monitor_gpu", 0) != 0;
     s.disable_dgpu_on_eco = ParseInt(kv, "disable_dgpu_on_eco", 1) != 0;
+    s.start_with_windows = ParseInt(kv, "start_with_windows", 1) != 0;
+    s.start_minimized = ParseInt(kv, "start_minimized", 0) != 0;
     s.rgb_mode = ParseInt(kv, "rgb_mode", 0);
     s.rgb_speed = ParseInt(kv, "rgb_speed", 3);
     s.rgb_brightness = ParseInt(kv, "rgb_brightness", 80);
@@ -94,6 +96,8 @@ void Settings::Save() const {
     out << "couple_fans=" << (couple_fans ? 1 : 0) << "\n";
     out << "monitor_gpu=" << (monitor_gpu ? 1 : 0) << "\n";
     out << "disable_dgpu_on_eco=" << (disable_dgpu_on_eco ? 1 : 0) << "\n";
+    out << "start_with_windows=" << (start_with_windows ? 1 : 0) << "\n";
+    out << "start_minimized=" << (start_minimized ? 1 : 0) << "\n";
     out << "rgb_mode=" << rgb_mode << "\n";
     out << "rgb_speed=" << rgb_speed << "\n";
     out << "rgb_brightness=" << rgb_brightness << "\n";

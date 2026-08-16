@@ -20,6 +20,8 @@ Predator key shows/hides the window. Predator+1–5 jumps modes. Turbo key toggl
 
 Grab `PredatorUtility-Setup-0.1.0.exe` from [Releases](https://github.com/ayeshamitzcov/acer-predator-utility/releases). It asks for Administrator, puts the app in Program Files, then installs PawnIO (CPU watts) and the VC++ runtime if you don't have them.
 
+Start with Windows is on by default (logon task, no UAC every boot). Settings has a checkbox to start minimized in the tray.
+
 The installer script is in `installer/` (Inno Setup + a small PowerShell deps script). To build it yourself:
 
 ```powershell

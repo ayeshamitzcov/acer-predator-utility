@@ -24,6 +24,7 @@ set(PREDATOR_COMPILE_DEFS
 set(PREDATOR_CORE_SOURCES
     src/common/Log.cpp
     src/common/Settings.cpp
+    src/common/Startup.cpp
     src/acer/WmiSession.cpp
     src/acer/GamingWmi.cpp
     src/acer/BatteryHealth.cpp
@@ -55,6 +56,7 @@ target_link_libraries(predator_core PUBLIC
     iphlpapi
     dxgi
     advapi32
+    taskschd
 )
 
 add_executable(predator-probe src/probe/main.cpp resources/app.rc)
