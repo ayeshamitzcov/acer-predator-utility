@@ -1,0 +1,5 @@
+PawnIO Intel MSR module (LGPL-2.1) from https://github.com/namazso/PawnIO.Modules
+and PawnIOLib.dll from the official PawnIO installer (https://pawnio.eu/).
+
+IntelMSR.bin is loaded into the signed PawnIO kernel driver at runtime.
+The driver itself must be installed separately.

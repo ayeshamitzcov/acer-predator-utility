@@ -1,0 +1,13 @@
+/build/
+/out/
+/cmake-build-*/
+/.vs/
+/CMakeUserPresets.json
+*.user
+*.sdf
+*.suo
+*.log
+.cache/
+probe-report.txt
+*.old.*.exe
+PredatorUtility.old.*
