@@ -1,0 +1,13 @@
+Predator Utility
+
+This installer needs Administrator so it can put the app in Program Files and install PawnIO (used for CPU watts).
+
+It will:
+  - Install Predator Utility
+  - Install the Visual C++ runtime if you don't already have it
+  - Download and install PawnIO from its official GitHub release
+
+Uninstall PredatorSense first if you still have it. It fights this app and steals the Predator key.
+
+Source is here:
+https://github.com/ayeshamitzcov/acer-predator-utility

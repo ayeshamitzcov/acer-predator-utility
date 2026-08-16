@@ -16,6 +16,18 @@ Unplug → battery saver. Plug in → ESports. You can still pick a mode yoursel
 
 Predator key shows/hides the window. Predator+1–5 jumps modes. Turbo key toggles Turbo and Normal.
 
+## Install
+
+Grab `PredatorUtility-Setup-0.1.0.exe` from [Releases](https://github.com/ayeshamitzcov/acer-predator-utility/releases). It asks for Administrator, puts the app in Program Files, then installs PawnIO (CPU watts) and the VC++ runtime if you don't have them.
+
+The installer script is in `installer/` (Inno Setup + a small PowerShell deps script). To build it yourself:
+
+```powershell
+.\scripts\Build-Installer.ps1
+```
+
+Output lands in `dist\`.
+
 ## Build
 
 Visual Studio with the C++ workload, CMake 3.20+, Git (Dear ImGui gets fetched).
@@ -38,7 +50,7 @@ Uninstall PredatorSense if it's still around. It steals the Predator key and fig
 
 `scripts/Disable-PredatorSenseBloat.ps1` is there if you only want the service killed.
 
-CPU watts need [PawnIO](https://pawnio.eu/) installed.
+CPU watts need [PawnIO](https://pawnio.eu/) installed. The setup exe does that for you.
 
 If fans go stupid, exit the app (it puts them back on auto) or reboot.
 
