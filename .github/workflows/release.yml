@@ -18,11 +18,15 @@ jobs:
       - name: Configure
         shell: pwsh
         run: |
-          $gen = "Visual Studio 17 2022"
+          $gen = "Visual Studio 18 2026"
           $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
           if (Test-Path $vswhere) {
             $line = & $vswhere -latest -property catalog_productLineVersion
-            if ("$line" -eq "18") { $gen = "Visual Studio 18 2026" }
+            $path = & $vswhere -latest -property installationPath
+            Write-Host "vswhere line=$line path=$path"
+            if ("$path" -match '\\17\\' -or "$line" -eq "17" -or "$line" -eq "2022") {
+              $gen = "Visual Studio 17 2022"
+            }
           }
           Write-Host "Using generator $gen"
           cmake -S . -B build -G $gen -A x64
