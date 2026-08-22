@@ -2,7 +2,7 @@
 
 I made this because the PredatorSense app is too clunky and power hungry and didn't have much customization.
 
-It's a small Windows app I run on my Predator PT315-52 (Helios 300, i7-10750H / RTX 2070 Max-Q) instead of Acer's software. It talks to the same firmware WMI (`AcerGamingFunction`) PredatorSense uses, so fans, modes, and RGB still work without that whole stack sitting in the background.
+It's a small Windows app I run on my Predator PT315-52 (Triton 300, i7-10750H / RTX 2070 Max-Q) instead of Acer's software. It talks to the same firmware WMI (`AcerGamingFunction`) PredatorSense uses, so fans, modes, and RGB still work without that whole stack sitting in the background.
 
 ## Modes
 
